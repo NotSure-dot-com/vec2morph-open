@@ -1,0 +1,70 @@
+name: Publish v0.1.0-research
+
+"on":
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/release-v0.1.0-research.yml
+      - .github/releases/v0.1.0-research.md
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: release-v0.1.0-research
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'NotSure-dot-com/vec2morph-open'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: v0.1.0-research
+      RELEASE_COMMIT: f7d61893d7f1c93bca38596522336fa12437b51a
+      MODEL_SHA256: 790a90ef6ab8f17da146e0122f38acd161462bcb31638903c26666754d18c4f3
+    steps:
+      - name: Check out public release repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Extract and verify the tagged checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse "${RELEASE_TAG}^{commit}")" = "$RELEASE_COMMIT"
+          mkdir -p release-assets
+          git show "${RELEASE_TAG}:model/vectomorph_arm_c_seed0.pth" > release-assets/vectomorph_arm_c_seed0.pth
+          test "$(wc -c < release-assets/vectomorph_arm_c_seed0.pth)" -eq 86882533
+          printf '%s  %s\n' "$MODEL_SHA256" vectomorph_arm_c_seed0.pth > release-assets/SHA256SUMS
+          (cd release-assets && sha256sum --check SHA256SUMS)
+          cp .github/releases/v0.1.0-research.md release-assets/QUICKSTART.md
+      - name: Attach verified downloads and publish research prerelease
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if ! gh release view "$RELEASE_TAG" --json isDraft > /dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --verify-tag --draft --prerelease --latest=false \
+              --title "VecToMorph v0.1.0-research" \
+              --notes-file .github/releases/v0.1.0-research.md
+          fi
+          mkdir -p verified-downloads
+          for name in vectomorph_arm_c_seed0.pth SHA256SUMS QUICKSTART.md; do
+            gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name' > asset-names.txt
+            if ! grep -Fxq "$name" asset-names.txt; then
+              gh release upload "$RELEASE_TAG" "release-assets/$name"
+            fi
+            gh release download "$RELEASE_TAG" --pattern "$name" --dir verified-downloads
+            cmp "release-assets/$name" "verified-downloads/$name"
+          done
+          (cd verified-downloads && sha256sum --check SHA256SUMS)
+          gh release edit "$RELEASE_TAG" --draft=false --prerelease --latest=false \
+            --title "VecToMorph v0.1.0-research" \
+            --notes-file .github/releases/v0.1.0-research.md
+          gh release view "$RELEASE_TAG" --json url,isDraft,isPrerelease,assets
