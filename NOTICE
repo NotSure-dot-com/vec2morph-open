@@ -1,0 +1,15 @@
+VecToMorph Open, Arm C v0.1.0-research
+Copyright 2026 VecToMorph contributors
+
+The code and fine-tuned checkpoint in this edition are offered under
+the Apache License, Version 2.0. This edition contains adapted inference
+utilities and a fine-tuned DINOv2 model.
+
+The encoder is based on DINOv2 by Meta Platforms and the timm implementation
+by Ross Wightman and contributors. The base model is
+https://huggingface.co/timm/vit_small_patch14_dinov2.lvd142m
+
+Fine-tuning used MLL23, Acevedo PBC, KU-Optofil PBC and UNIVALI.
+Their original records and recorded licenses are listed in SOURCES.md.
+The original datasets are credited to their respective authors and retain
+their separate licenses. No original microscopy images are included.

@@ -1,0 +1,235 @@
+{
+  "checkpoint_sha256": "790a90ef6ab8f17da146e0122f38acd161462bcb31638903c26666754d18c4f3",
+  "class_order": [
+    "neutrophils",
+    "eosinophils",
+    "basophils",
+    "lymphocytes",
+    "monocytes",
+    "immature_granulocytes",
+    "erythroblasts"
+  ],
+  "confusion_matrix_axes": [
+    "rows = reference labels",
+    "columns = predicted labels"
+  ],
+  "park": {
+    "source": "https://doi.org/10.1038/s41597-024-03938-1",
+    "focus_plane": 5,
+    "cells": 1323,
+    "smears": 97,
+    "scope": "Source excluded from training. Smears absent from earlier development probes. Smear IDs do not establish patient separation. Earlier probes had exposed all regular-lymphocyte smears.",
+    "complete_seven_class_external_endpoint": false,
+    "accuracy": 0.8246409674981103,
+    "macro_f1_on_represented_classes": 0.5746501000372167,
+    "missing_ground_truth_classes": [
+      "lymphocytes"
+    ],
+    "per_class": {
+      "neutrophils": {
+        "cells": 179,
+        "slides": 6,
+        "true_positives": 169,
+        "false_positives": 79,
+        "recall": 0.9441340782122905,
+        "precision": 0.6814516129032258,
+        "f1": 0.7915690866510539
+      },
+      "eosinophils": {
+        "cells": 3,
+        "slides": 2,
+        "true_positives": 1,
+        "false_positives": 6,
+        "recall": 0.3333333333333333,
+        "precision": 0.14285714285714285,
+        "f1": 0.2
+      },
+      "basophils": {
+        "cells": 5,
+        "slides": 3,
+        "true_positives": 2,
+        "false_positives": 2,
+        "recall": 0.4,
+        "precision": 0.5,
+        "f1": 0.4444444444444444
+      },
+      "lymphocytes": {
+        "cells": 0,
+        "slides": 0,
+        "true_positives": 0,
+        "false_positives": 61,
+        "recall": null,
+        "precision": 0.0,
+        "f1": null
+      },
+      "monocytes": {
+        "cells": 65,
+        "slides": 2,
+        "true_positives": 31,
+        "false_positives": 40,
+        "recall": 0.47692307692307695,
+        "precision": 0.43661971830985913,
+        "f1": 0.45588235294117646
+      },
+      "immature_granulocytes": {
+        "cells": 1063,
+        "slides": 90,
+        "true_positives": 880,
+        "false_positives": 36,
+        "recall": 0.8278457196613358,
+        "precision": 0.9606986899563319,
+        "f1": 0.8893380495199595
+      },
+      "erythroblasts": {
+        "cells": 8,
+        "slides": 1,
+        "true_positives": 8,
+        "false_positives": 8,
+        "recall": 1.0,
+        "precision": 0.5,
+        "f1": 0.6666666666666666
+      }
+    },
+    "confusion_matrix": [
+      [
+        169,
+        0,
+        0,
+        5,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        2,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        31,
+        33,
+        0
+      ],
+      [
+        77,
+        5,
+        1,
+        55,
+        38,
+        880,
+        7
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8
+      ]
+    ]
+  },
+  "univali": {
+    "source": "https://zenodo.org/records/17743609",
+    "cells": 979,
+    "scope": "Publisher internal test of a training source. Augmented-image ancestry across published splits is partly unresolved.",
+    "independent_external_test": false,
+    "accuracy": 0.9662921348314607,
+    "macro_f1_on_represented_classes": 0.8110507170048248,
+    "missing_ground_truth_classes": [
+      "erythroblasts"
+    ],
+    "confusion_matrix": [
+      [
+        302,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        10,
+        338,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        268,
+        11,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        0,
+        2,
+        31,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  }
+}

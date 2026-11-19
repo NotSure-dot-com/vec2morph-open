@@ -1,0 +1,114 @@
+{
+  "format": "vectomorph.arm-c.v1",
+  "checkpoint": "vectomorph_arm_c_seed0.pth",
+  "sha256": "790a90ef6ab8f17da146e0122f38acd161462bcb31638903c26666754d18c4f3",
+  "model": {
+    "name": "vit_small_patch14_dinov2.lvd142m",
+    "image_size": 252,
+    "embedding_batch_size": 64,
+    "l2_normalize": true,
+    "feature_mode": "cls_patch_mean"
+  },
+  "shared_labels": {
+    "coarse": [
+      "neutrophils",
+      "eosinophils",
+      "basophils",
+      "lymphocytes",
+      "monocytes",
+      "immature_granulocytes",
+      "erythroblasts"
+    ],
+    "ne_stage": [
+      "band",
+      "segmented"
+    ],
+    "ig_stage": [
+      "promyelocyte",
+      "myelocyte",
+      "metamyelocyte"
+    ]
+  },
+  "native_labels": {
+    "acevedo": [
+      "basophil",
+      "eosinophil",
+      "erythroblast",
+      "ig",
+      "lymphocyte",
+      "monocyte",
+      "neutrophil",
+      "platelet"
+    ],
+    "ku": [
+      "band_neutrophil",
+      "basophil",
+      "blast",
+      "eosinophil",
+      "erythroblast",
+      "giant_platelet",
+      "lymphocyte",
+      "metamyelocyte",
+      "monocyte",
+      "myelocyte",
+      "platelet_cluster",
+      "reactive_lymphocyte",
+      "segmented_neutrophil"
+    ],
+    "mll23": [
+      "basophil",
+      "eosinophil",
+      "hairy_cell",
+      "lymphocyte",
+      "lymphocyte_large_granular",
+      "lymphocyte_neoplastic",
+      "lymphocyte_reactive",
+      "metamyelocyte",
+      "monocyte",
+      "myeloblast",
+      "myelocyte",
+      "neutrophil_band",
+      "neutrophil_segmented",
+      "normoblast",
+      "plasma_cell",
+      "promyelocyte",
+      "promyelocyte_atypical",
+      "smudge_cell"
+    ],
+    "univali": [
+      "Artefato",
+      "Basofilo",
+      "Bastonete",
+      "Blasto",
+      "Eosinofilo",
+      "Eritroblasto",
+      "Linfocito",
+      "Linfocito atipico",
+      "Metamielocito",
+      "Mielocito",
+      "Monocito",
+      "Neutrofilo segmentado",
+      "Promielocito",
+      "Restos celulares"
+    ]
+  },
+  "train_sources": [
+    "acevedo",
+    "ku",
+    "mll23",
+    "univali"
+  ],
+  "seed": 0,
+  "training_protocol_sha256": "4282a3ed176972f86a10617e45958f48a8737b6640345d80f11cb938c65927e1",
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "license": "Apache-2.0"
+}
