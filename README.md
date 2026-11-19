@@ -53,7 +53,7 @@ The shared head uses this fixed order
 
 Two conditional heads distinguish band from segmented neutrophils and promyelocytes from myelocytes and metamyelocytes.
 
-Source-specific heads preserve the original categories of Acevedo, KU, MLL23 and UNIVALI. To inspect one, add `--native-head mll23`, for example. Their full labels are listed in [model/model.json](model/model.json). These include blast and atypical-cell categories, but this release does not establish their diagnostic accuracy or cross-laboratory validity. Neither the native nor the conditional stage heads have a detailed performance endpoint in this release. A native head does not override the shared prediction.
+Source-specific heads preserve the original categories of Acevedo, KU, MLL23 and UNIVALI. To inspect one, add `--native-head mll23`, for example. Their full labels are listed in [model/model.json](model/model.json). These include blast and atypical-cell categories, but this release does not establish their diagnostic accuracy or cross-laboratory validity. The [post-release class-level audit](model/VALIDATION_AUDIT.md) adds native and conditional stage-head checks, with training contact and zero-support classes shown explicitly. Independent external validation of these heads remains open. A native head does not override the shared prediction.
 
 ## Training summary
 
@@ -96,6 +96,8 @@ Park was absent from release training. The selected 97 smears were also absent f
 UNIVALI is a training source. Its publisher test is an internal check, and augmented-image ancestry across its published splits is partly unresolved. It does not measure performance in a new laboratory.
 
 The difference between these endpoints illustrates a substantial domain shift. Neither endpoint establishes complete seven-class external performance. Neither provides clinical validation. The class supports and confusion matrices are in [model/evaluation.json](model/evaluation.json).
+
+For all original labels in the four prepared training-source datasets, see the [validation and coverage audit](model/VALIDATION_AUDIT.md). It distinguishes actually trained cells, retrospectively identified undrawn cells and the complete UNIVALI publisher test. The [aggregate audit JSON](model/validation_audit.json) includes per-class confusion matrices; this addendum uses the unchanged released checkpoint.
 
 The original release loader reproduced the archived Park confusion matrix on all 1,323 cells using CUDA BF16 encoder inference and FP32 heads. The open edition is checked separately for compatibility.
 
