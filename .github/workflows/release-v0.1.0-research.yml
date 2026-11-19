@@ -9,6 +9,9 @@ name: Publish v0.1.0-research
       - model/validation_audit.json
       - model/VALIDATION_AUDIT.md
       - scripts/build_validation_audit.py
+      - model/finetuning_comparison.json
+      - model/FINETUNING_COMPARISON.md
+      - scripts/build_finetuning_comparison.py
   workflow_dispatch:
 
 permissions: {}
@@ -48,6 +51,9 @@ jobs:
           python3 scripts/build_validation_audit.py --output release-assets/VALIDATION_AUDIT.md
           cmp model/VALIDATION_AUDIT.md release-assets/VALIDATION_AUDIT.md
           cp model/validation_audit.json release-assets/validation_audit.json
+          python3 scripts/build_finetuning_comparison.py --output release-assets/FINETUNING_COMPARISON.md
+          cmp model/FINETUNING_COMPARISON.md release-assets/FINETUNING_COMPARISON.md
+          cp model/finetuning_comparison.json release-assets/finetuning_comparison.json
       - name: Attach verified downloads and publish research prerelease
         shell: bash
         env:
@@ -61,7 +67,7 @@ jobs:
               --notes-file .github/releases/v0.1.0-research.md
           fi
           mkdir -p verified-downloads
-          for name in vectomorph_arm_c_seed0.pth SHA256SUMS QUICKSTART.md VALIDATION_AUDIT.md validation_audit.json; do
+          for name in vectomorph_arm_c_seed0.pth SHA256SUMS QUICKSTART.md VALIDATION_AUDIT.md validation_audit.json FINETUNING_COMPARISON.md finetuning_comparison.json; do
             gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name' > asset-names.txt
             if ! grep -Fxq "$name" asset-names.txt; then
               gh release upload "$RELEASE_TAG" "release-assets/$name"

@@ -1,0 +1,1257 @@
+{
+  "format": "vectomorph.encoder-finetuning-comparison.v1",
+  "scope": "Archived source-held-out recipe comparison; fold-specific checkpoints, not the released four-source checkpoint",
+  "before": "Generic pretrained DINOv2 encoder frozen; linear shared and source-specific heads trained",
+  "after": "Same generic DINOv2 initialization; last two encoder blocks and all heads jointly fine-tuned",
+  "generic_encoder_sha256": "04d27f3400d059fc0cfd7d17dd1909a75bf3ea8fb3eeb48b97cb99e57ee20081",
+  "source_metrics_sha256": "5a56dfe5cc87b5aa1b6c168c1f626f57eb4abf050f9b1cc62d044768f968acd1",
+  "study_protocol_sha256": "5ac930e0c8236096f6956d51ba1c79d111173a961e7d0162a83b99432a1f8d7e",
+  "training": {
+    "epochs": 5,
+    "draws_per_epoch": 6144,
+    "effective_batch": 32,
+    "seeds": [
+      0,
+      1
+    ],
+    "augmentation": "train only: all eight rotations/reflections",
+    "optimizer": {
+      "name": "AdamW",
+      "head_lr": 0.002,
+      "encoder_lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "precision": "BF16 encoder, FP32 linear heads/loss"
+  },
+  "labels": [
+    "neutrophils",
+    "eosinophils",
+    "basophils",
+    "lymphocytes",
+    "monocytes",
+    "immature_granulocytes",
+    "erythroblasts"
+  ],
+  "primary_sources": [
+    "mll23",
+    "acevedo",
+    "ku"
+  ],
+  "supplementary_sources": [
+    "univali"
+  ],
+  "datasets": {
+    "mll23": {
+      "role": "primary held-out source",
+      "pairs": [
+        {
+          "seed": 0,
+          "before": {
+            "checkpoint_sha256": "d76a64487ed5e5f6fdac9557d8fc268fbbd5c256e806f99f434d83d5674971e3",
+            "predictions_sha256": "8fdd008d7051d51019bc96a174e7154a42f9d611e4577e45b1ac1ed37a1a615e",
+            "confusion_matrix": [
+              [
+                3933,
+                2286,
+                300,
+                5,
+                1036,
+                240,
+                57
+              ],
+              [
+                129,
+                1611,
+                161,
+                18,
+                119,
+                243,
+                167
+              ],
+              [
+                7,
+                296,
+                212,
+                13,
+                26,
+                36,
+                26
+              ],
+              [
+                207,
+                1188,
+                435,
+                771,
+                1217,
+                822,
+                892
+              ],
+              [
+                397,
+                582,
+                35,
+                16,
+                1169,
+                237,
+                74
+              ],
+              [
+                99,
+                259,
+                37,
+                43,
+                268,
+                1233,
+                36
+              ],
+              [
+                15,
+                124,
+                65,
+                29,
+                30,
+                32,
+                1776
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "3784ff20a51e5a87a23a96d48b6bbfe521f51a7739be3416745ef6a5cf7e4f90",
+            "predictions_sha256": "dcb133b671321bfc28dc140e29e3a3e1fc81299c45a29acdd8068e0e130f589c",
+            "confusion_matrix": [
+              [
+                6879,
+                21,
+                57,
+                21,
+                196,
+                564,
+                119
+              ],
+              [
+                64,
+                1521,
+                389,
+                76,
+                12,
+                45,
+                341
+              ],
+              [
+                10,
+                2,
+                560,
+                11,
+                1,
+                28,
+                4
+              ],
+              [
+                5,
+                2,
+                54,
+                4213,
+                190,
+                137,
+                931
+              ],
+              [
+                16,
+                0,
+                13,
+                497,
+                1767,
+                100,
+                117
+              ],
+              [
+                16,
+                0,
+                28,
+                298,
+                115,
+                1503,
+                15
+              ],
+              [
+                2,
+                0,
+                0,
+                44,
+                1,
+                0,
+                2024
+              ]
+            ]
+          },
+          "training_sources": [
+            "acevedo",
+            "ku",
+            "univali"
+          ],
+          "training_schedule_sha256": "40b007624817f9e6b2f91925a0992855587d32f43a41e1522cc4476c16900e6c",
+          "unique_training_cells": 22325,
+          "test_case_and_label_sequence_sha256": "a03f329f4f6f2502b48630554df23672b539b6ab2a3301f188522bf4b6d93935"
+        },
+        {
+          "seed": 1,
+          "before": {
+            "checkpoint_sha256": "a596319b4234eed81fa32c01cbd1746b3ace19943880814b868d74cd8f5fdf88",
+            "predictions_sha256": "5584f2c229c3a2a57efb3137095c0ded7885dba127dc993597d5ee1ae09544c2",
+            "confusion_matrix": [
+              [
+                5162,
+                668,
+                535,
+                2,
+                992,
+                449,
+                49
+              ],
+              [
+                338,
+                1000,
+                293,
+                12,
+                135,
+                481,
+                189
+              ],
+              [
+                16,
+                127,
+                330,
+                4,
+                18,
+                94,
+                27
+              ],
+              [
+                364,
+                369,
+                981,
+                458,
+                1106,
+                1351,
+                903
+              ],
+              [
+                572,
+                190,
+                64,
+                11,
+                1175,
+                429,
+                69
+              ],
+              [
+                139,
+                41,
+                61,
+                11,
+                207,
+                1488,
+                28
+              ],
+              [
+                36,
+                23,
+                181,
+                8,
+                21,
+                67,
+                1735
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "f70202cc3a997d7f0e3406947b6f58a9f7148fd7c500f93fa19793b7734d3901",
+            "predictions_sha256": "7fccedf1a4982d7634810eef8616916425522100e73268d7aba7252c955d6e11",
+            "confusion_matrix": [
+              [
+                7288,
+                19,
+                71,
+                9,
+                13,
+                384,
+                73
+              ],
+              [
+                165,
+                1536,
+                364,
+                32,
+                0,
+                43,
+                308
+              ],
+              [
+                21,
+                1,
+                551,
+                7,
+                0,
+                32,
+                4
+              ],
+              [
+                52,
+                4,
+                130,
+                2951,
+                205,
+                184,
+                2006
+              ],
+              [
+                208,
+                2,
+                43,
+                288,
+                1383,
+                361,
+                225
+              ],
+              [
+                35,
+                3,
+                25,
+                150,
+                39,
+                1696,
+                27
+              ],
+              [
+                2,
+                0,
+                0,
+                17,
+                0,
+                2,
+                2050
+              ]
+            ]
+          },
+          "training_sources": [
+            "acevedo",
+            "ku",
+            "univali"
+          ],
+          "training_schedule_sha256": "b649bd398d6a9c99db8ccb0c733e1fa5ac0fc356476c65a7248d2f0b4e72ad70",
+          "unique_training_cells": 22315,
+          "test_case_and_label_sequence_sha256": "a03f329f4f6f2502b48630554df23672b539b6ab2a3301f188522bf4b6d93935"
+        }
+      ]
+    },
+    "acevedo": {
+      "role": "primary held-out source",
+      "pairs": [
+        {
+          "seed": 0,
+          "before": {
+            "checkpoint_sha256": "26b38835adfdcfb698baa541c72d8ef25effcf148a8e46eeda9bca6671eb93d8",
+            "predictions_sha256": "f88f66a32c57dc1f56c5219ff39d7f32a872e99cf3c0ec5415e4917ff39570ac",
+            "confusion_matrix": [
+              [
+                3240,
+                3,
+                6,
+                1,
+                48,
+                16,
+                14
+              ],
+              [
+                2565,
+                123,
+                55,
+                16,
+                40,
+                208,
+                103
+              ],
+              [
+                48,
+                5,
+                859,
+                32,
+                12,
+                125,
+                131
+              ],
+              [
+                25,
+                1,
+                94,
+                556,
+                5,
+                133,
+                400
+              ],
+              [
+                392,
+                1,
+                10,
+                48,
+                680,
+                263,
+                25
+              ],
+              [
+                572,
+                1,
+                74,
+                37,
+                83,
+                1981,
+                144
+              ],
+              [
+                74,
+                3,
+                47,
+                86,
+                6,
+                76,
+                1259
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "48d98fc86b230ed8ae85814f0cfb7c13c43066af5256194587cec42474b338a2",
+            "predictions_sha256": "c256f429cecf413d475553ad00fafa7d755e1e9f85b827d2033d218ebd38a344",
+            "confusion_matrix": [
+              [
+                3294,
+                0,
+                2,
+                1,
+                28,
+                3,
+                0
+              ],
+              [
+                39,
+                3058,
+                0,
+                1,
+                10,
+                2,
+                0
+              ],
+              [
+                1,
+                3,
+                1170,
+                6,
+                21,
+                10,
+                1
+              ],
+              [
+                2,
+                0,
+                1,
+                1192,
+                17,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                12,
+                1401,
+                3,
+                0
+              ],
+              [
+                448,
+                0,
+                97,
+                27,
+                475,
+                1845,
+                0
+              ],
+              [
+                17,
+                1,
+                7,
+                215,
+                60,
+                1,
+                1250
+              ]
+            ]
+          },
+          "training_sources": [
+            "ku",
+            "mll23",
+            "univali"
+          ],
+          "training_schedule_sha256": "ef1c56feb504367b0406bf6e61e322e97fad98e7eac36db0fd9ec20111e2a88f",
+          "unique_training_cells": 21446,
+          "test_case_and_label_sequence_sha256": "1b762337bfd525c1f15b346e7efbd005bcca0b410e406b187ca54b5cf3f1861a"
+        },
+        {
+          "seed": 1,
+          "before": {
+            "checkpoint_sha256": "f28cf9c4a6f753559652a20330e30f1cc31f424f02bb242c1278dbb3cb6efc28",
+            "predictions_sha256": "dca88d5a7fb4bc9c6974f32ed0673d23e8109f32025cc2bb953cbb43754af189",
+            "confusion_matrix": [
+              [
+                3248,
+                12,
+                31,
+                0,
+                28,
+                4,
+                5
+              ],
+              [
+                2473,
+                407,
+                110,
+                5,
+                10,
+                61,
+                44
+              ],
+              [
+                29,
+                5,
+                1098,
+                4,
+                0,
+                33,
+                43
+              ],
+              [
+                38,
+                1,
+                395,
+                368,
+                1,
+                104,
+                307
+              ],
+              [
+                478,
+                20,
+                104,
+                25,
+                611,
+                169,
+                12
+              ],
+              [
+                731,
+                9,
+                409,
+                9,
+                64,
+                1571,
+                99
+              ],
+              [
+                99,
+                11,
+                183,
+                51,
+                2,
+                59,
+                1146
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "78a5db8462d2ec721329141f8a6311f8a63d02c8c38fbc9287885b5ed4e6ebd7",
+            "predictions_sha256": "8b4604b18e20b094ca5a4a47bc8517fc4a7e03d3338f6b0a0f6510ec316b681d",
+            "confusion_matrix": [
+              [
+                3209,
+                0,
+                3,
+                0,
+                103,
+                13,
+                0
+              ],
+              [
+                21,
+                3058,
+                2,
+                0,
+                28,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                1172,
+                4,
+                21,
+                10,
+                3
+              ],
+              [
+                2,
+                0,
+                2,
+                1181,
+                26,
+                1,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                12,
+                1405,
+                2,
+                0
+              ],
+              [
+                197,
+                2,
+                142,
+                29,
+                724,
+                1793,
+                5
+              ],
+              [
+                6,
+                0,
+                5,
+                123,
+                59,
+                1,
+                1357
+              ]
+            ]
+          },
+          "training_sources": [
+            "ku",
+            "mll23",
+            "univali"
+          ],
+          "training_schedule_sha256": "979269fcaab7d2a674cc88299a21beb2792feb443d0a9227cfdadd67a61e65c2",
+          "unique_training_cells": 21444,
+          "test_case_and_label_sequence_sha256": "1b762337bfd525c1f15b346e7efbd005bcca0b410e406b187ca54b5cf3f1861a"
+        }
+      ]
+    },
+    "ku": {
+      "role": "primary held-out source",
+      "pairs": [
+        {
+          "seed": 0,
+          "before": {
+            "checkpoint_sha256": "2624074647f6c2cc7e5b85225b2d56bb864eb1384280e2dd746ced6f0e2d69dc",
+            "predictions_sha256": "7319c6ae88eef0161c234563dc8beeb252cd5c4a07005c3a6d8f35b6fc677f3f",
+            "confusion_matrix": [
+              [
+                11741,
+                7,
+                40,
+                138,
+                62,
+                12,
+                4454
+              ],
+              [
+                873,
+                273,
+                110,
+                187,
+                76,
+                69,
+                274
+              ],
+              [
+                3,
+                0,
+                330,
+                119,
+                0,
+                1,
+                93
+              ],
+              [
+                15,
+                0,
+                15,
+                3133,
+                15,
+                8,
+                2576
+              ],
+              [
+                341,
+                3,
+                22,
+                240,
+                607,
+                64,
+                104
+              ],
+              [
+                35,
+                0,
+                7,
+                115,
+                38,
+                91,
+                74
+              ],
+              [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                242
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "cee9ab1aae58df22afcd477691b7b0a182a37f90fad404da1e60bfef8f5f7934",
+            "predictions_sha256": "71343919bee8def491be96efd0361ce7fcc7f45b7db4a9c138ee84ebe776a6db",
+            "confusion_matrix": [
+              [
+                16287,
+                7,
+                2,
+                2,
+                1,
+                77,
+                78
+              ],
+              [
+                13,
+                1847,
+                0,
+                1,
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                539,
+                2,
+                0,
+                5,
+                0
+              ],
+              [
+                5,
+                2,
+                8,
+                4360,
+                21,
+                243,
+                1123
+              ],
+              [
+                88,
+                0,
+                0,
+                12,
+                971,
+                299,
+                11
+              ],
+              [
+                13,
+                0,
+                0,
+                3,
+                12,
+                330,
+                2
+              ],
+              [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                241
+              ]
+            ]
+          },
+          "training_sources": [
+            "acevedo",
+            "mll23",
+            "univali"
+          ],
+          "training_schedule_sha256": "68ae3d6ce26182359867bdc8bbd394da2642a7f48ca854a2b99b8ac040584d1d",
+          "unique_training_cells": 24501,
+          "test_case_and_label_sequence_sha256": "03f7f53f266cbf4927187944f3ed1752abd80a28d5c6e6f9f2c78a2eaf31cc67"
+        },
+        {
+          "seed": 1,
+          "before": {
+            "checkpoint_sha256": "e695f1c9ae5109de74a480a6290d92422305a2841a4d0ce62b06e6159bf9fe58",
+            "predictions_sha256": "d6f7ce1e41bf9ffed9c02ec904363dfe3943e7d42ee0a2133c00e89934206a2f",
+            "confusion_matrix": [
+              [
+                12812,
+                53,
+                24,
+                250,
+                37,
+                1,
+                3277
+              ],
+              [
+                729,
+                690,
+                42,
+                203,
+                23,
+                3,
+                172
+              ],
+              [
+                6,
+                0,
+                299,
+                163,
+                0,
+                1,
+                77
+              ],
+              [
+                17,
+                1,
+                10,
+                3861,
+                6,
+                1,
+                1866
+              ],
+              [
+                414,
+                28,
+                13,
+                365,
+                476,
+                6,
+                79
+              ],
+              [
+                54,
+                3,
+                7,
+                173,
+                26,
+                34,
+                63
+              ],
+              [
+                2,
+                0,
+                0,
+                2,
+                0,
+                0,
+                239
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "03a652a589c51f6eed45f1fe69fa9dd9dbe798d3185d3db109673d3ac8d59411",
+            "predictions_sha256": "4b2b27bad5b230f10bf076909396b76c67524b54d89c96552cff1a45f2965597",
+            "confusion_matrix": [
+              [
+                16234,
+                28,
+                1,
+                1,
+                1,
+                52,
+                137
+              ],
+              [
+                4,
+                1857,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                537,
+                4,
+                0,
+                4,
+                1
+              ],
+              [
+                3,
+                1,
+                4,
+                4546,
+                6,
+                33,
+                1169
+              ],
+              [
+                86,
+                5,
+                0,
+                54,
+                990,
+                213,
+                33
+              ],
+              [
+                15,
+                0,
+                0,
+                22,
+                16,
+                303,
+                4
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                242
+              ]
+            ]
+          },
+          "training_sources": [
+            "acevedo",
+            "mll23",
+            "univali"
+          ],
+          "training_schedule_sha256": "59c489e2bcbfda6fccc245a9ed0d8218493fdb2a099b8b438ec62346a0d64d86",
+          "unique_training_cells": 24505,
+          "test_case_and_label_sequence_sha256": "03f7f53f266cbf4927187944f3ed1752abd80a28d5c6e6f9f2c78a2eaf31cc67"
+        }
+      ]
+    },
+    "univali": {
+      "role": "supplementary publisher-test subset",
+      "pairs": [
+        {
+          "seed": 0,
+          "before": {
+            "checkpoint_sha256": "842f884b43f3456dcbeee83a21456aaebfbcbb08ea0957aa229c412c671fe0c4",
+            "predictions_sha256": "007a24a5c7c6956a19f2fd0426d82578d84366cb8ed61e3bcf5c958dc7919932",
+            "confusion_matrix": [
+              [
+                137,
+                71,
+                2,
+                0,
+                76,
+                17,
+                0
+              ],
+              [
+                1,
+                277,
+                2,
+                0,
+                47,
+                21,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0,
+                4,
+                0
+              ],
+              [
+                0,
+                1,
+                8,
+                1,
+                74,
+                197,
+                0
+              ],
+              [
+                2,
+                4,
+                0,
+                0,
+                29,
+                5,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "a41eacb0c43e4f74473570e8c92da03e80847c10b8747ddb4f6fa29676092cd3",
+            "predictions_sha256": "e9dc4f08e189fb26f1f078fe8fab3af081a362eee59dac30d560463472c321c1",
+            "confusion_matrix": [
+              [
+                213,
+                40,
+                44,
+                0,
+                4,
+                2,
+                0
+              ],
+              [
+                0,
+                328,
+                20,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                6,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                25,
+                17,
+                96,
+                136,
+                6
+              ],
+              [
+                0,
+                1,
+                5,
+                0,
+                26,
+                8,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+          "training_sources": [
+            "acevedo",
+            "ku",
+            "mll23"
+          ],
+          "training_schedule_sha256": "43e3d612c3b2e3c465ebd8f13ff554b5cdcccb5a0e3848d97364a3cbd4130834",
+          "unique_training_cells": 26382,
+          "test_case_and_label_sequence_sha256": "335ecd11e402d5dde6385d8a52038e83f64f9fc23fe8bc9088563847babfd874"
+        },
+        {
+          "seed": 1,
+          "before": {
+            "checkpoint_sha256": "d8224e083c2c8408d4e5f807f0ba6a67735d451704888b2eef9d19bca9fbfbe6",
+            "predictions_sha256": "1dcf1acc64e3d23573f0eb91041587e77277bc9ce5ebc27f5d1c406d59469f44",
+            "confusion_matrix": [
+              [
+                143,
+                9,
+                2,
+                0,
+                130,
+                19,
+                0
+              ],
+              [
+                5,
+                135,
+                10,
+                0,
+                164,
+                34,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0,
+                4,
+                0
+              ],
+              [
+                0,
+                0,
+                9,
+                0,
+                93,
+                179,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                0,
+                34,
+                4,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+          "after": {
+            "checkpoint_sha256": "fdb96bbc753441b813eb9d42875d208269d983d5c7bf4b7b733e007f684c7763",
+            "predictions_sha256": "438d441ea1d150bca0edb77731f66ac4f4ee0226577461fefb9f60aae09ac697",
+            "confusion_matrix": [
+              [
+                225,
+                22,
+                27,
+                0,
+                19,
+                10,
+                0
+              ],
+              [
+                0,
+                330,
+                18,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                6,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4,
+                0,
+                82,
+                195,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                24,
+                14,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          },
+          "training_sources": [
+            "acevedo",
+            "ku",
+            "mll23"
+          ],
+          "training_schedule_sha256": "664844b44302c2da63b532ae97d8535afe31206cb5c54e8b4d7566a31fe282ef",
+          "unique_training_cells": 26385,
+          "test_case_and_label_sequence_sha256": "335ecd11e402d5dde6385d8a52038e83f64f9fc23fe8bc9088563847babfd874"
+        }
+      ]
+    }
+  }
+}
