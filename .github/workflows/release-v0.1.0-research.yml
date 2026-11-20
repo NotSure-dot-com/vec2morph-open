@@ -12,6 +12,9 @@ name: Publish v0.1.0-research
       - model/finetuning_comparison.json
       - model/FINETUNING_COMPARISON.md
       - scripts/build_finetuning_comparison.py
+      - model/generalization_evidence.json
+      - model/GENERALIZATION_EVIDENCE.md
+      - scripts/build_generalization_evidence.py
   workflow_dispatch:
 
 permissions: {}
@@ -54,6 +57,9 @@ jobs:
           python3 scripts/build_finetuning_comparison.py --output release-assets/FINETUNING_COMPARISON.md
           cmp model/FINETUNING_COMPARISON.md release-assets/FINETUNING_COMPARISON.md
           cp model/finetuning_comparison.json release-assets/finetuning_comparison.json
+          python3 scripts/build_generalization_evidence.py --output release-assets/GENERALIZATION_EVIDENCE.md
+          cmp model/GENERALIZATION_EVIDENCE.md release-assets/GENERALIZATION_EVIDENCE.md
+          cp model/generalization_evidence.json release-assets/generalization_evidence.json
       - name: Attach verified downloads and publish research prerelease
         shell: bash
         env:
@@ -67,7 +73,7 @@ jobs:
               --notes-file .github/releases/v0.1.0-research.md
           fi
           mkdir -p verified-downloads
-          for name in vectomorph_arm_c_seed0.pth SHA256SUMS QUICKSTART.md VALIDATION_AUDIT.md validation_audit.json FINETUNING_COMPARISON.md finetuning_comparison.json; do
+          for name in vectomorph_arm_c_seed0.pth SHA256SUMS QUICKSTART.md VALIDATION_AUDIT.md validation_audit.json FINETUNING_COMPARISON.md finetuning_comparison.json GENERALIZATION_EVIDENCE.md generalization_evidence.json; do
             gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name' > asset-names.txt
             if ! grep -Fxq "$name" asset-names.txt; then
               gh release upload "$RELEASE_TAG" "release-assets/$name"

@@ -95,11 +95,13 @@ Park was absent from release training. The selected 97 smears were also absent f
 
 UNIVALI is a training source. Its publisher test is an internal check, and augmented-image ancestry across its published splits is partly unresolved. It does not measure performance in a new laboratory.
 
-The difference between these endpoints illustrates a substantial domain shift. Neither endpoint establishes complete seven-class external performance. Neither provides clinical validation. The class supports and confusion matrices are in [model/evaluation.json](model/evaluation.json).
+The endpoints differ in source and class distribution. Their performance difference is consistent with domain sensitivity and does not isolate acquisition effects from case mix or annotation differences. Neither endpoint establishes complete seven-class external performance. Neither provides clinical validation. The class supports and confusion matrices are in [model/evaluation.json](model/evaluation.json).
 
 For all original labels in the four prepared training-source datasets, see the [validation and coverage audit](model/VALIDATION_AUDIT.md). It distinguishes actually trained cells, retrospectively identified undrawn cells and the complete UNIVALI publisher test. The [aggregate audit JSON](model/validation_audit.json) includes per-class confusion matrices; this addendum uses the unchanged released checkpoint.
 
 The [matched before/after comparison](model/FINETUNING_COMPARISON.md) reports frozen pretrained DINOv2 with trained heads alongside encoder fine-tuning with trained heads, including per-class F1 and changes in percentage points. These archived source-held-out recipe experiments use separate fold-specific checkpoints; their numbers are distinct from the released-checkpoint audit above. Our reporting convention keeps matched before/after results together and labels unavailable baselines explicitly.
+
+The [generalization evidence overview](model/GENERALIZATION_EVIDENCE.md) separates measured encoder/source-breadth effects, missing controls and feature-mechanism hypotheses. It includes the one-source versus multi-source comparison and a short related-work check. Residual source sensitivity is observed; reliance on acquisition peculiarities instead of cell morphology has not been causally established.
 
 The original release loader reproduced the archived Park confusion matrix on all 1,323 cells using CUDA BF16 encoder inference and FP32 heads. The open edition is checked separately for compatibility.
 
