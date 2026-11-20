@@ -84,6 +84,8 @@ Sampling balanced sources and their original categories. The release uses the sh
 
 ## Evaluation and limits
 
+**Performance depends on the dataset, acquisition conditions and evaluation protocol.** High performance on Acevedo, MLL23 or another individual dataset does not establish comparable performance in another laboratory or imaging system. In our source-held-out experiments, training on multiple sources did not reliably eliminate source dependence. Transfer to each new target source therefore requires separate validation. The contributions of acquisition style, case mix and annotation differences remain unresolved; the [generalization evidence overview](model/GENERALIZATION_EVIDENCE.md) documents the measured comparisons and their limits.
+
 These results apply to the bundled checkpoint and its **shared head**. Macro-F1 averages only the six ground-truth classes represented in each evaluation subset.
 
 | Evaluation | Cells | Accuracy | Macro-F1 | Missing ground-truth class |

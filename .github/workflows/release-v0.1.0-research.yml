@@ -33,6 +33,7 @@ jobs:
     env:
       RELEASE_TAG: v0.1.0-research
       RELEASE_COMMIT: f7d61893d7f1c93bca38596522336fa12437b51a
+      QUICKSTART_COMMIT: beb667431a00f422c2b85c36f9710b1c241b4855
       MODEL_SHA256: 790a90ef6ab8f17da146e0122f38acd161462bcb31638903c26666754d18c4f3
     steps:
       - name: Check out public release repository
@@ -50,7 +51,8 @@ jobs:
           test "$(wc -c < release-assets/vectomorph_arm_c_seed0.pth)" -eq 86882533
           printf '%s  %s\n' "$MODEL_SHA256" vectomorph_arm_c_seed0.pth > release-assets/SHA256SUMS
           (cd release-assets && sha256sum --check SHA256SUMS)
-          cp .github/releases/v0.1.0-research.md release-assets/QUICKSTART.md
+          # Preserve the published guide while allowing the live release notes to evolve.
+          git show "${QUICKSTART_COMMIT}:.github/releases/v0.1.0-research.md" > release-assets/QUICKSTART.md
           python3 scripts/build_validation_audit.py --output release-assets/VALIDATION_AUDIT.md
           cmp model/VALIDATION_AUDIT.md release-assets/VALIDATION_AUDIT.md
           cp model/validation_audit.json release-assets/validation_audit.json
